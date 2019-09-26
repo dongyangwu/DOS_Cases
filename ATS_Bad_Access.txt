@@ -1,0 +1,43 @@
+(lldb) bt
+* thread #1, queue = 'com.apple.main-thread', stop reason = EXC_BAD_ACCESS (code=1, address=0x0)
+  * frame #0: 0x00007fff50d40d80 libATSServer.dylib`HandleFontManagementMessage + 4874
+    frame #1: 0x00007fff50d3e166 libATSServer.dylib`serverMainHandler(__CFMachPort*, FontMgrMessage*, long, void*) + 261
+    frame #2: 0x00007ffeffff961c
+    frame #3: 0x00007fff527f7597 CoreFoundation`__CFRUNLOOP_IS_CALLING_OUT_TO_A_SOURCE1_PERFORM_FUNCTION__ + 41
+    frame #4: 0x00007fff527f74f5 CoreFoundation`__CFRunLoopDoSource1 + 527
+    frame #5: 0x00007fff527df4ec CoreFoundation`__CFRunLoopRun + 2524
+    frame #6: 0x00007fff527de8be CoreFoundation`CFRunLoopRunSpecific + 455
+    frame #7: 0x00007fff527de6d2 CoreFoundation`CFRunLoopRun + 40
+    frame #8: 0x00007fff50d3d7b3 libATSServer.dylib`main_handler + 4300
+    frame #9: 0x00007fff7e70d3d5 libdyld.dylib`start + 1
+(lldb) f 0
+frame #0: 0x00007fff50d40d80 libATSServer.dylib`HandleFontManagementMessage + 4874
+libATSServer.dylib`HandleFontManagementMessage:
+->  0x7fff50d40d80 <+4874>: movl   %ecx, (%rax)
+    0x7fff50d40d82 <+4876>: movq   -0x498(%rbp), %r10
+    0x7fff50d40d89 <+4883>: movl   0x28(%r10), %eax
+    0x7fff50d40d8d <+4887>: movl   %eax, 0x28(%rdx)
+
+(lldb) register read
+General Purpose Registers:
+       rax = 0x0000000000000000
+       rbx = 0x00007ff725f0c6b0
+       rcx = 0x0000000006000000
+       rdx = 0x00007ff725f0c690
+       rdi = 0x000000001000000a
+       rsi = 0x0000000000000607
+       rbp = 0x00007ffee384de70
+       rsp = 0x00007ffee384d930
+        r8 = 0x0000000000000607
+        r9 = 0x0000000000000000
+       r10 = 0x00000000ffffffff
+       r11 = 0x0000000000000287
+       r12 = 0x00007ffee384f140
+       r13 = 0x00007fffb508260c  libsystem_kernel.dylib`mach_task_self_
+       r14 = 0x0000000000000003
+       r15 = 0x00007fffad51c0a8  libATSServer.dylib`gIdleTimeOut
+       rip = 0x00007fff50d40d80  libATSServer.dylib`HandleFontManagementMessage + 4874
+    rflags = 0x0000000000010246
+        cs = 0x000000000000002b
+        fs = 0x0000000000000000
+        gs = 0x0000000000000000
